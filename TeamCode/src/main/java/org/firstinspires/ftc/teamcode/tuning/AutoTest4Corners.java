@@ -25,14 +25,14 @@ public final class AutoTest4Corners extends LinearOpMode {
                             // path to go touch all four corners (start in bottom right corner center of tile (blue wing))
 
                             drive.actionBuilder(new Pose2d(-60.00, -60.00, Math.toRadians(0.00)))
-                            .splineTo(new Vector2d(60.00, -60.00), Math.toRadians(-0.26))
-                            .splineTo(new Vector2d(45.00, -60.00), Math.toRadians(180.00))
-                            .splineTo(new Vector2d(21.18, 0.54), Math.toRadians(58.55))
-                            .splineTo(new Vector2d(32.85, 35.40), Math.toRadians(30.00))
-                            .splineTo(new Vector2d(43.17, 60.00), Math.toRadians(0.00))
-                            .splineTo(new Vector2d(60.00, 60.00), Math.toRadians(0.00))
-                            .splineTo(new Vector2d(-60.00, 60.00), Math.toRadians(0.00))
-                            .splineTo(new Vector2d(-58.32, -71.87), Math.toRadians(-81.96))
+                            .strafeToLinearHeading(new Vector2d(60.00, -60.00), Math.toRadians(-0.26))
+                            .strafeToLinearHeading(new Vector2d(45.00, -60.00), Math.toRadians(180.00))
+                            .strafeToLinearHeading(new Vector2d(21.18, 0.54), Math.toRadians(58.55))
+                            .strafeToLinearHeading(new Vector2d(32.85, 35.40), Math.toRadians(30.00))
+                            .strafeToLinearHeading(new Vector2d(43.17, 60.00), Math.toRadians(0.00))
+                            .strafeToLinearHeading(new Vector2d(60.00, 60.00), Math.toRadians(0.00))
+                            .strafeToLinearHeading(new Vector2d(-60.00, 60.00), Math.toRadians(0.00))
+                            .strafeToLinearHeading(new Vector2d(-58.32, -71.87), Math.toRadians(-81.96))
                             .build());
 
 
