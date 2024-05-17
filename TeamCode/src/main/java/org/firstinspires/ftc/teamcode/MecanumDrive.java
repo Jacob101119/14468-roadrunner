@@ -96,6 +96,8 @@ public final class MecanumDrive {
         public double maxAngVel = Math.PI; // shared with path
         public double maxAngAccel = Math.PI;
 
+
+
         // path controller gains
         //TODO Step 13 Set value of Gains after running ManualFeedbackTuner
         public double axialGain = 5.0;
@@ -167,6 +169,7 @@ public final class MecanumDrive {
             lastHeading = Rotation2d.exp(imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS));
         }
 
+
         @Override
         public Twist2dDual<Time> update() {
             PositionVelocityPair leftFrontPosVel = leftFront.getPositionAndVelocity();
@@ -211,7 +214,11 @@ public final class MecanumDrive {
                     DualNum.cons(headingDelta, twist.angle.drop(1))
             );
         }
+
+
     }
+    double headingOffset = 0;
+    double initialHeading = 0;
 
     public MecanumDrive(HardwareMap hardwareMap, Pose2d pose) {
         this.pose = pose;
@@ -482,6 +489,7 @@ public final class MecanumDrive {
     public PoseVelocity2d updatePoseEstimate() {
         Twist2dDual<Time> twist = localizer.update();
         pose = pose.plus(twist.value());
+        pose = new Pose2d(pose.position, getHeading());
 
         poseHistory.add(pose);
         while (poseHistory.size() > 100) {
@@ -533,11 +541,15 @@ public final class MecanumDrive {
         );
     }
 //start cole updates
-        /*
+
     public double getHeading(){
         return imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS)+Math.toRadians(initialHeading)-Math.toRadians(headingOffset);
     }
+
+    public void resetHeading(){
+        headingOffset = Math.toDegrees(imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS));
+    }
     //end cole updates
-    */
+
 
 }

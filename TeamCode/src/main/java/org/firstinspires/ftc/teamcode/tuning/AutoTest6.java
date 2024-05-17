@@ -29,7 +29,6 @@ public final class AutoTest6 extends LinearOpMode {
                             .strafeToLinearHeading(new Vector2d(10, -10), Math.toRadians(-180))
                             .strafeTo(new Vector2d(10, 15))
                             .strafeToLinearHeading(new Vector2d(0, 0), Math.toRadians(180))
-
                             .build());
         } else if (TuningOpModes.DRIVE_CLASS.equals(TankDrive.class)) {
             TankDrive drive = new TankDrive(hardwareMap, new Pose2d(0, 0, 0));
