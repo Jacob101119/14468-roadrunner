@@ -25,15 +25,16 @@ public final class AutoTest4Corners extends LinearOpMode {
                             // path to go touch all four corners (start in bottom right corner center of tile (blue wing))
 
                             drive.actionBuilder(new Pose2d(-60.00, -60.00, Math.toRadians(0.00)))
-                            .strafeToLinearHeading(new Vector2d(60.00, -60.00), Math.toRadians(-0.26))
-                            .strafeToLinearHeading(new Vector2d(45.00, -60.00), Math.toRadians(180.00))
-                            .strafeToLinearHeading(new Vector2d(21.18, 0.54), Math.toRadians(58.55))
-                            .strafeToLinearHeading(new Vector2d(32.85, 35.40), Math.toRadians(30.00))
-                            .strafeToLinearHeading(new Vector2d(43.17, 60.00), Math.toRadians(0.00))
+                            .strafeToConstantHeading(new Vector2d(60.00, -60.00))
+                            .strafeToLinearHeading(new Vector2d(45.00, -60.00), Math.toRadians(180))
                             .strafeToLinearHeading(new Vector2d(60.00, 60.00), Math.toRadians(0.00))
-                            .strafeToLinearHeading(new Vector2d(-60.00, 60.00), Math.toRadians(0.00))
-                            .strafeToLinearHeading(new Vector2d(-58.32, -71.87), Math.toRadians(-81.96))
+                            .strafeToLinearHeading(new Vector2d(54.44, 60.07), Math.toRadians(180))
+                            .strafeToConstantHeading(new Vector2d(-60.00, 60.00))
+                            .strafeToLinearHeading(new Vector2d(-52.16, 60.34), Math.toRadians(0.00))
+                            .strafeToLinearHeading(new Vector2d(-49.47, 28.02), Math.toRadians(255.60))
+                            .strafeToLinearHeading(new Vector2d(-56.31, -59.93), Math.toRadians(268.02))
                             .build());
+
 
 
         } else if (TuningOpModes.DRIVE_CLASS.equals(TankDrive.class)) {
