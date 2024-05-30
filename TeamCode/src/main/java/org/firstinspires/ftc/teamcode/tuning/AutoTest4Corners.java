@@ -14,7 +14,7 @@ public final class AutoTest4Corners extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         if (TuningOpModes.DRIVE_CLASS.equals(MecanumDrive.class)) {
-            MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
+            MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(-60, -60, 0));
 
             waitForStart();
 //new updates to run movements
@@ -26,7 +26,7 @@ public final class AutoTest4Corners extends LinearOpMode {
 
                             drive.actionBuilder(new Pose2d(-60.00, -60.00, Math.toRadians(0.00)))
                             .strafeToConstantHeading(new Vector2d(60.00, -60.00))
-                            .strafeToLinearHeading(new Vector2d(45.00, -60.00), Math.toRadians(180))
+                            .strafeTo(new Vector2d(45.00, -60.00))
                             .strafeToLinearHeading(new Vector2d(60.00, 60.00), Math.toRadians(0.00))
                             .strafeToLinearHeading(new Vector2d(54.44, 60.07), Math.toRadians(180))
                             .strafeToConstantHeading(new Vector2d(-60.00, 60.00))

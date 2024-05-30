@@ -14,7 +14,7 @@ public final class RRPathGen extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         if (TuningOpModes.DRIVE_CLASS.equals(MecanumDrive.class)) {
-            MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
+            MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(-36.0, -60.0, 0));
 
             waitForStart();
 //new updates to run movements
@@ -24,11 +24,17 @@ public final class RRPathGen extends LinearOpMode {
 
 
 
-                    drive.actionBuilder(new Pose2d(-36.47, -58.99, Math.toRadians(90)))
-                            .strafeToLinearHeading(new Vector2d(-36.34, 4.02), Math.toRadians(90))
-
+                    drive.actionBuilder(new Pose2d(-36.0, -60.00, Math.toRadians(0.00)))
+                            .strafeToLinearHeading(new Vector2d(60.00, -60.00), Math.toRadians(0.00))
+                            .strafeToLinearHeading(new Vector2d(30.00, -60.00), Math.toRadians(180.88))
+                            .strafeToLinearHeading(new Vector2d(30.00, -60.00), Math.toRadians(0.00))
+                            .strafeToLinearHeading(new Vector2d(60.00, 60.00), Math.toRadians(0.00))
+                            .strafeToLinearHeading(new Vector2d(54.44, 60.07), Math.toRadians(179.31))
+                            .strafeToLinearHeading(new Vector2d(-60.00, 60.00), Math.toRadians(179.73))
+                            .strafeToLinearHeading(new Vector2d(-52.16, 60.34), Math.toRadians(0.00))
+                            .strafeToLinearHeading(new Vector2d(-49.47, 28.02), Math.toRadians(255.60))
+                            .strafeToLinearHeading(new Vector2d(-56.31, -59.93), Math.toRadians(268.02))
                             .build());
-
 
 
         } else if (TuningOpModes.DRIVE_CLASS.equals(TankDrive.class)) {

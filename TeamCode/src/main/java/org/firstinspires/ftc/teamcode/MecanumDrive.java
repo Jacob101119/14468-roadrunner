@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
+
 import androidx.annotation.NonNull;
 
 import com.acmerobotics.dashboard.canvas.Canvas;
@@ -39,6 +41,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.teamcode.messages.DriveCommandMessage;
 import org.firstinspires.ftc.teamcode.messages.MecanumCommandMessage;
@@ -88,9 +91,9 @@ public final class MecanumDrive {
         public double kA = 0.0001;
 
         // path profile parameters (in inches)
-        public double maxWheelVel = 50; // orginal is 50
+        public double maxWheelVel = 40; // orginal is 50
         public double minProfileAccel = -30; // original is -30
-        public double maxProfileAccel = 30; // original is 30
+        public double maxProfileAccel = 25; // original is 30
 
         // turn profile parameters (in radians)
         public double maxAngVel = Math.PI; // shared with path
@@ -100,9 +103,9 @@ public final class MecanumDrive {
 
         // path controller gains
         //TODO Step 13 Set value of Gains after running ManualFeedbackTuner
-        public double axialGain = 5.0;
-        public double lateralGain = 5.5;
-        public double headingGain = 1.5; // shared with turn
+        public double axialGain = 5.0;//5.0
+        public double lateralGain = 5.5;//5.5
+        public double headingGain = 1.5; // shared with turn //1.5
 
         public double axialVelGain = 0.0;
         public double lateralVelGain = 0.0;
@@ -550,6 +553,29 @@ public final class MecanumDrive {
         headingOffset = Math.toDegrees(imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS));
     }
     //end cole updates
+    public void driveFieldcentric(double xPow, double yPow, double rotPow, double speed, Telemetry telemetry) {
+        if (Math.abs(xPow) < .05 && Math.abs(yPow) < .05) {
+            setDrivePowers(new PoseVelocity2d(new Vector2d(0, 0), rotPow * speed));
+            return;
+        }
+
+        double targetTheta = Math.atan2(Math.toRadians(yPow), Math.toRadians(xPow));
+        double robotTheta = getHeading();
+        double diffTheta = Math.toDegrees(targetTheta) - Math.toDegrees(robotTheta);
+        if (telemetry != null)
+            telemetry.addLine("Target " + Math.toDegrees(targetTheta) + " Robot " + Math.toDegrees(robotTheta) + " Difference " + diffTheta);
+        xPow = Math.cos(Math.toRadians(diffTheta)) * speed;
+        yPow = Math.sin(Math.toRadians(diffTheta)) * speed;
+        rotPow = rotPow * speed;
+        rotPow = rotPow * speed;
+        if (telemetry != null) {
+            telemetry.addLine("XPOW: " + xPow);
+            telemetry.addLine("YPOW" + yPow);
+            telemetry.addLine("ROT POW" + rotPow);
+            telemetry.addLine("DIFF " + Math.toDegrees(diffTheta));
+        }
+        setDrivePowers(new PoseVelocity2d(new Vector2d(xPow, yPow), rotPow));
+    }
 
 
 }
